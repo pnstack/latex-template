@@ -1,0 +1,91 @@
+name: Render LaTeX to PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'example/**'
+      - '.github/workflows/latex.yml'
+  pull_request:
+    paths:
+      - 'example/**'
+      - '.github/workflows/latex.yml'
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to checkout'
+        required: false
+        default: ''
+      working_directory:
+        description: 'LaTeX working directory'
+        required: false
+        default: 'example'
+      root_files:
+        description: |
+          Root tex files. Supports comma or multiline.
+          Example:
+          main.tex
+          chapter1.tex
+        required: false
+        default: 'main.tex'
+      artifact_name:
+        description: 'Artifact name'
+        required: false
+        default: 'pdf'
+
+# Defaults for push/pull_request; workflow_dispatch inputs override them.
+env:
+  WORKING_DIRECTORY: ${{ inputs.working_directory || 'example' }}
+  ROOT_FILES: ${{ inputs.root_files || 'main.tex' }}
+  ARTIFACT_NAME: ${{ inputs.artifact_name || 'pdf' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch || '' }}
+
+      - name: Normalize root files
+        id: root-files
+        shell: bash
+        run: |
+          {
+            echo 'files<<EOF'
+            echo "$ROOT_FILES" \
+              | tr ',' '\n' \
+              | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' \
+              | sed '/^$/d'
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+          echo "Root files:"
+          echo "$ROOT_FILES" | tr ',' '\n'
+
+      - name: Compile LaTeX batch
+        uses: xu-cheng/latex-action@v4
+        with:
+          os: debian
+          working_directory: ${{ env.WORKING_DIRECTORY }}
+          latexmk_use_xelatex: true
+          extra_system_packages: |
+            fonts-noto
+            fonts-noto-cjk
+            fonts-noto-color-emoji
+            texlive-pictures
+            texlive-latex-extra
+            texlive-science
+            ghostscript
+            poppler-utils
+          root_file: |
+            ${{ steps.root-files.outputs.files }}
+
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.WORKING_DIRECTORY }}/*.pdf
+          if-no-files-found: error
