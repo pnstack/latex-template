@@ -1,0 +1,110 @@
+
+% ============================================================
+\section{Định nghĩa}
+% ============================================================
+
+Cho $A_{n \times n}$. Số $\lambda \in \mathbb{C}$ là \textbf{trị riêng} của $A$ nếu:
+\[
+\det(A - \lambda I) = 0
+\]
+
+Vector $v \neq 0$ thỏa mãn $Av = \lambda v$ là \textbf{vector riêng} tương ứng.
+
+Tập tất cả vector riêng của $\lambda$ cùng với $0$ tạo thành \textbf{không gian riêng (eigenspace):}
+\[
+E_\lambda = \ker(A - \lambda I)
+\]
+
+% ============================================================
+\section{Đa thức đặc trưng}
+% ============================================================
+
+\[
+p(\lambda) = \det(A - \lambda I) = (-1)^n \lambda^n + c_{n-1}\lambda^{n-1} + \cdots + c_1 \lambda + c_0
+\]
+
+\textbf{Hệ số:}
+\begin{align}
+c_0 &= \det(A) = \prod_{i=1}^n \lambda_i \\
+c_{n-1} &= (-1)^{n-1} \operatorname{tr}(A) = (-1)^{n-1} \sum_{i=1}^n \lambda_i
+\end{align}
+
+% ============================================================
+\section{Tổng và tích trị riêng}
+% ============================================================
+
+\begin{align}
+\sum_{i=1}^n \lambda_i &= \operatorname{tr}(A) = \sum_{i=1}^n a_{ii} \\
+\prod_{i=1}^n \lambda_i &= \det(A)
+\end{align}
+
+% ============================================================
+\section{Tính trị riêng -- Bậc 2}
+% ============================================================
+
+Cho $A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$:
+
+\[
+p(\lambda) = \lambda^2 - (a+d)\lambda + (ad-bc) = \lambda^2 - \operatorname{tr}(A)\lambda + \det(A)
+\]
+
+\[
+\lambda = \frac{\operatorname{tr}(A) \pm \sqrt{\operatorname{tr}(A)^2 - 4\det(A)}}{2}
+\]
+
+% ============================================================
+\section{Đa thức tối thiểu (Minimal Polynomial)}
+% ============================================================
+
+$m_A(\lambda)$ là đa thức bậc nhỏ nhất sao cho $m_A(A) = O$.
+
+\[
+m_A(\lambda) \mid p(\lambda) \quad \text{(chia hết)}
+\]
+Mỗi nhân của $p(\lambda)$ xuất hiện trong $m_A(\lambda)$ (có thể với bậc nhỏ hơn).
+
+% ============================================================
+\section{Tính chất trị riêng}
+% ============================================================
+
+\begin{enumerate}
+    \item $A$ và $A^T$ có cùng trị riêng (khác vector riêng nói chung).
+    \item Trị riêng của $A^{-1}$ là $\dfrac{1}{\lambda_i}$.
+    \item Trị riêng của $A^k$ là $\lambda_i^k$.
+    \item Trị riêng của $A + cI$ là $\lambda_i + c$.
+    \item Trị riêng của $cA$ là $c\lambda_i$.
+    \item $A$ Hermitian $\Longrightarrow$ mọi trị riêng thực.
+    \item $A$ Hermitian dương xác định $\Longrightarrow$ mọi $\lambda_i > 0$.
+    \item $A$ đơn vị (unitary) $\Longrightarrow$ $|\lambda_i| = 1$.
+    \item $A$ luân phiên $\Longrightarrow$ $|\lambda_i| = 1$.
+    \item $A$ lũy 0 ($A^k = O$) $\Longrightarrow$ mọi $\lambda_i = 0$.
+\end{enumerate}
+
+% ============================================================
+\section{Giá trị suy biến (Singular Values)}
+% ============================================================
+
+Cho $A_{m \times n}$. Giá trị suy biến:
+\[
+\sigma_i = \sqrt{\lambda_i(A^* A)} = \sqrt{\lambda_i(A A^*)}
+\]
+với $\lambda_i$ là trị riêng của $A^*A$ (bán xác định dương).
+
+\[
+\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r > 0 = \sigma_{r+1} = \cdots, \quad r = \operatorname{rank}(A)
+\]
+
+% ============================================================
+\section{Đa thức Cayley--Hamilton}
+% ============================================================
+
+Mọi ma trận thỏa mãn đa thức đặc trưng của chính nó:
+\[
+p(A) = A^n + c_{n-1}A^{n-1} + \cdots + c_1 A + c_0 I = O
+\]
+
+Hệ quả:
+\[
+A^{-1} = -\frac{1}{c_0}\bigl(A^{n-1} + c_{n-1}A^{n-2} + \cdots + c_1 I\bigr) \quad (\text{nếu } c_0 = \det A \neq 0)
+\]
+

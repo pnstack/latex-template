@@ -1,0 +1,199 @@
+
+% ============================================================
+\section{Định nghĩa ma trận}
+% ============================================================
+
+Ma trận $A$ cấp $m \times n$:
+\[
+A = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1} & a_{m2} & \cdots & a_{mn}
+\end{pmatrix}
+= (a_{ij})_{m \times n}, \quad i = 1,\dots,m;\; j = 1,\dots,n
+\]
+
+% ============================================================
+\section{Các loại ma trận đặc biệt}
+% ============================================================
+
+\subsection{Ma trận vuông}
+Ma trận có $m = n$.
+
+\subsection{Ma trận đường chéo (diagonal)}
+\[
+D = \operatorname{diag}(\lambda_1, \lambda_2, \dots, \lambda_n) =
+\begin{pmatrix}
+\lambda_1 & 0 & \cdots & 0 \\
+0 & \lambda_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \lambda_n
+\end{pmatrix}
+\]
+
+\subsection{Ma trận đơn vị (identity)}
+\[
+I_n = \operatorname{diag}(1, 1, \dots, 1) =
+\begin{pmatrix}
+1 & 0 & \cdots & 0 \\
+0 & 1 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & 1
+\end{pmatrix}
+\]
+Tính chất: $\forall A_{m \times n}$, $I_m A = A I_n = A$.
+
+\subsection{Ma trận không (zero)}
+$O_{m \times n}$: mọi phần tử bằng $0$.
+
+\subsection{Ma trận tam giác}
+\textbf{Tam giác trên (upper triangular):}
+\[
+U = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+0 & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & a_{nn}
+\end{pmatrix}, \quad u_{ij} = 0 \;\forall\; i > j
+\]
+
+\textbf{Tam giác dưới (lower triangular):}
+\[
+L = \begin{pmatrix}
+a_{11} & 0 & \cdots & 0 \\
+a_{21} & a_{22} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix}, \quad l_{ij} = 0 \;\forall\; i < j
+\]
+
+\subsection{Ma trận đối xứng (symmetric)}
+\[
+A^T = A \quad \Longleftrightarrow \quad a_{ij} = a_{ji} \;\;\forall\, i,j
+\]
+
+\subsection{Ma trận phản đối xứng (skew-symmetric)}
+\[
+A^T = -A \quad \Longleftrightarrow \quad a_{ij} = -a_{ji} \;\;\forall\, i,j
+\]
+Suy ra $a_{ii} = 0$ trên đường chéo.
+
+\subsection{Ma trận luân phiên (permutation)}
+Ma trận thu được bằng cách hoán đổi các hàng (hoặc cột) của $I_n$. Khi nhân: $PA$ hoán đổi các hàng của $A$.
+
+\subsection{Ma trận khả nghịch (invertible)}
+$A$ khả nghịch $\Longleftrightarrow$ $\exists\, B$ sao cho $AB = BA = I$. Khi đó ký hiệu $B = A^{-1}$.
+
+% ============================================================
+\section{Phép cộng ma trận}
+% ============================================================
+
+\[
+(A + B)_{ij} = a_{ij} + b_{ij}
+\]
+Yêu cầu: $A, B$ cùng cấp $m \times n$.
+
+\textbf{Tính chất:}
+\begin{align}
+A + B &= B + A \quad \text{(giao hoán)} \\
+(A + B) + C &= A + (B + C) \quad \text{(kết hợp)} \\
+A + O &= A \\
+A + (-A) &= O
+\end{align}
+
+% ============================================================
+\section{Phép nhân vô hướng}
+% ============================================================
+
+\[
+(cA)_{ij} = c \cdot a_{ij}
+\]
+
+\textbf{Tính chất:}
+\begin{align}
+c(A + B) &= cA + cB \\
+(c + d)A &= cA + dA \\
+(cd)A &= c(dA) \\
+1 \cdot A &= A
+\end{align}
+
+% ============================================================
+\section{Phép nhân ma trận}
+% ============================================================
+
+Cho $A_{m \times p}$, $B_{p \times n}$. Tích $C = AB$ có cấp $m \times n$:
+\[
+c_{ij} = \sum_{k=1}^{p} a_{ik} \, b_{kj}
+\]
+
+\textbf{Tính chất:}
+\begin{align}
+(AB)C &= A(BC) \quad \text{(kết hợp)} \\
+A(B + C) &= AB + AC \quad \text{(phân phối trái)} \\
+(A + B)C &= AC + BC \quad \text{(phân phối phải)} \\
+c(AB) &= (cA)B = A(cB) \\
+AI &= IA = A \\
+AB &\neq BA \quad \text{(nói chung không giao hoán)}
+\end{align}
+
+% ============================================================
+\section{Chuyển vị (Transpose)}
+% ============================================================
+
+\[
+(A^T)_{ij} = a_{ji}
+\]
+
+\textbf{Tính chất:}
+\begin{align}
+(A^T)^T &= A \\
+(A + B)^T &= A^T + B^T \\
+(cA)^T &= cA^T \\
+(AB)^T &= B^T A^T \\
+(A_1 A_2 \cdots A_k)^T &= A_k^T \cdots A_2^T A_1^T
+\end{align}
+
+% ============================================================
+\section{Ma trận chuyển vị liên hợp (Conjugate Transpose)}
+% ============================================================
+
+\[
+A^* = \overline{A}^T = (\overline{a_{ji}})
+\]
+
+Nếu $A^* = A$ thì $A$ là \textbf{Hermitian}.
+
+% ============================================================
+\section{Lũy thừa ma trận}
+% ============================================================
+
+\begin{align}
+A^0 &= I \\
+A^1 &= A \\
+A^n &= \underbrace{A \cdot A \cdots A}_{n \text{ lần}} \\
+A^{-n} &= (A^{-1})^n \quad \text{(nếu } A \text{ khả nghịch)}
+\end{align}
+
+\textbf{Tính chất:}
+\begin{align}
+A^m A^n &= A^{m+n} \\
+(A^m)^n &= A^{mn} \\
+(AB)^n &\neq A^n B^n \quad \text{(nói chung)}
+\end{align}
+Nếu $AB = BA$ thì $(AB)^n = A^n B^n$.
+
+% ============================================================
+\section{Ma trận lũy thừa (Vandermonde \& Companion)}
+% ============================================================
+
+\textbf{Ma trận Vandermonde:}
+\[
+V = \begin{pmatrix}
+1 & x_1 & x_1^2 & \cdots & x_1^{n-1} \\
+1 & x_2 & x_2^2 & \cdots & x_2^{n-1} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+1 & x_n & x_n^2 & \cdots & x_n^{n-1}
+\end{pmatrix}, \quad \det(V) = \prod_{1 \le i < j \le n}(x_j - x_i)
+\]
+

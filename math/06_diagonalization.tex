@@ -1,0 +1,141 @@
+
+% ============================================================
+\section{Đường chéo hóa (Diagonalization)}
+% ============================================================
+
+$A_{n \times n}$ đường chéo hóa được khi và chỉ khi $A$ có $n$ vector riêng độc lập tuyến tính.
+
+\[
+A = PDP^{-1} \quad \Longleftrightarrow \quad D = P^{-1}AP
+\]
+trong đó:
+\begin{itemize}
+    \item $D = \operatorname{diag}(\lambda_1, \lambda_2, \dots, \lambda_n)$
+    \item $P = \bigl(v_1 \mid v_2 \mid \cdots \mid v_n\bigr)$ \quad ($v_i$ là vector riêng)
+\end{itemize}
+
+\textbf{Lũy thừa:}
+\[
+A^k = PD^kP^{-1} = P\operatorname{diag}(\lambda_1^k, \dots, \lambda_n^k)P^{-1}
+\]
+
+% ============================================================
+\section{Điều kiện đường chéo hóa}
+% ============================================================
+
+Các điều kiện tương đương:
+\begin{enumerate}
+    \item $A$ có $n$ vector riêng độc lập tuyến tính.
+    \item Tổng bội hình học của mọi trị riêng bằng $n$.
+    \item Bội hình học của mỗi trị riêng bằng bội đại số.
+    \item $m_A(\lambda)$ không có nhân bậc $\ge 2$.
+    \item $A$ tương đương với ma trận đường chéo.
+\end{enumerate}
+
+\textbf{Bội đại số (algebraic multiplicity):} số lần $\lambda$ là nghiệm của $p(\lambda) = 0$.
+
+\textbf{Bội hình học (geometric multiplicity):}
+\[
+\operatorname{geo}(\lambda) = \dim\bigl(E_\lambda\bigr) = \dim\bigl(\ker(A - \lambda I)\bigr)
+\]
+Luôn: $1 \le \operatorname{geo}(\lambda) \le \operatorname{alg}(\lambda)$.
+
+% ============================================================
+\section{Đường chéo hóa ma trận đối xứng thực}
+% ============================================================
+
+Mọi ma trận đối xứng thực $A = A^T$ đều đường chéo hóa được:
+\[
+A = Q\Lambda Q^T, \quad Q^TQ = QQ^T = I
+\]
+trong đó $\Lambda$ đường chéo thực, $Q$ trực giao.
+
+\textbf{Tính chất:}
+\begin{enumerate}
+    \item Mọi trị riêng là số thực.
+    \item Vector riêng tương ứng các trị riêng khác nhau trực giao.
+    \item $A$ Hermitian dương xác định $\Longleftrightarrow$ mọi $\lambda_i > 0$.
+    \item $A$ Hermitian bán xác định dương $\Longleftrightarrow$ mọi $\lambda_i \ge 0$.
+\end{enumerate}
+
+% ============================================================
+\section{Phân tích Jordan (Jordan Normal Form)}
+% ============================================================
+
+Khi $A$ \textbf{không} đường chéo hóa được, tồn tại $P$ sao cho:
+\[
+A = PJP^{-1}
+\]
+trong đó $J$ là ma trận Jordan:
+\[
+J = \begin{pmatrix}
+J_{n_1}(\lambda_1) & & \\
+& J_{n_2}(\lambda_2) & \\
+& & \ddots \\
+& & & J_{n_k}(\lambda_k)
+\end{pmatrix}
+\]
+
+\textbf{Khối Jordan} cấp $n_i$:
+\[
+J_{n_i}(\lambda) = \begin{pmatrix}
+\lambda & 1 & 0 & \cdots & 0 \\
+0 & \lambda & 1 & \cdots & 0 \\
+0 & 0 & \lambda & \ddots & \vdots \\
+\vdots & \vdots & \ddots & \ddots & 1 \\
+0 & 0 & \cdots & 0 & \lambda
+\end{pmatrix}
+= \lambda I + N
+\]
+trong đó $N$ là ma trận luân phiên cấp $n_i$ với $1$ trên đường chéo ngay phía trên.
+
+\textbf{Lũy thừa khối Jordan:}
+\[
+J_n(\lambda)^k = \begin{pmatrix}
+\lambda^k & \binom{k}{1}\lambda^{k-1} & \binom{k}{2}\lambda^{k-2} & \cdots \\
+0 & \lambda^k & \binom{k}{1}\lambda^{k-1} & \cdots \\
+0 & 0 & \lambda^k & \cdots \\
+\vdots & \vdots & \vdots & \ddots
+\end{pmatrix}
+\]
+
+% ============================================================
+\section{Ma trận lũy 0 (Nilpotent)}
+% ============================================================
+
+$N$ lũy 0 cấp $k$ nếu $N^k = O$ nhưng $N^{k-1} \neq O$.
+
+Mọi trị riêng của $N$ bằng $0$. Dạng Jordan chỉ gồm $J_{n_i}(0)$.
+
+% ============================================================
+\section{Ma trận lũy 1 (Idempotent)}
+% ============================================================
+
+$P$ lũy 1 nếu $P^2 = P$.
+
+Trị riêng chỉ gồm $0$ và $1$. Đường chéo hóa được:
+\[
+P = PDP^{-1}, \quad D = \operatorname{diag}(\underbrace{1,\dots,1}_{r},\underbrace{0,\dots,0}_{n-r})
+\]
+
+% ============================================================
+\section{Phân tích Schur}
+% ============================================================
+
+Mọi ma trận vuông $A$ đều tam giác hóa được:
+\[
+A = UTU^*
+\]
+trong đó $U$ đơn vị ($U^*U = I$), $T$ tam giác trên.
+
+Nếu $A$ Hermitian thì $T = \Lambda$ (đường chéo), suy ra:
+\[
+A = U\Lambda U^*
+\]
+
+% ============================================================
+\section{Đối hóa đồng thời (Simultaneous Diagonalization)}
+% ============================================================
+
+Hai ma trận Hermitian $A, B$ đối xứng hóa đồng thời ($P^{-1}AP$ và $P^{-1}B$ đều đường chéo) khi và chỉ khi $AB = BA$.
+

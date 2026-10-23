@@ -1,0 +1,97 @@
+
+% ============================================================
+\section{Định nghĩa hạng (Rank)}
+% ============================================================
+
+Hạng của ma trận $A_{m \times n}$, ký hiệu $\operatorname{rank}(A)$:
+\begin{itemize}
+    \item Số hàng độc lập tuyến tính tối đa.
+    \item Số cột độc lập tuyến tính tối đa.
+    \item Cấp của con không (minor) khác $0$ lớn nhất.
+    \item Số trị riêng khác $0$ (với ma trận vuông).
+\end{itemize}
+
+\[
+0 \le \operatorname{rank}(A) \le \min(m, n)
+\]
+
+% ============================================================
+\section{Tính chất hạng}
+% ============================================================
+
+\begin{align}
+\operatorname{rank}(A) &= \operatorname{rank}(A^T) \\
+\operatorname{rank}(AB) &\le \min\bigl(\operatorname{rank}(A),\, \operatorname{rank}(B)\bigr) \\
+\operatorname{rank}(A + B) &\le \operatorname{rank}(A) + \operatorname{rank}(B) \\
+\operatorname{rank}(A) + \operatorname{rank}(B) - n &\le \operatorname{rank}(AB) \quad \text{(Sylvester)} \\
+\operatorname{rank}(cA) &= \operatorname{rank}(A), \quad c \neq 0 \\
+\operatorname{rank}(A) &= n \iff \det(A) \neq 0 \quad (A \text{ vuông})
+\end{align}
+
+% ============================================================
+\section{Định lý Rank--Nullity}
+% ============================================================
+
+Cho ánh xạ tuyến tính $T: V \to W$ với ma trận biểu diễn $A_{m \times n}$:
+\[
+\operatorname{rank}(A) + \operatorname{nullity}(A) = n
+\]
+trong đó $\operatorname{nullity}(A) = \dim\bigl(\ker(A)\bigr)$.
+
+Hệ quả cho ma trận vuông cấp $n$:
+\[
+\operatorname{rank}(A) = n \iff \ker(A) = \{0\} \iff A \text{ khả nghịch}
+\]
+
+% ============================================================
+\section{Null Space và Column Space}
+% ============================================================
+
+\textbf{Null space (Kernel):}
+\[
+\ker(A) = \{x \in \mathbb{R}^n \mid Ax = 0\}
+\]
+
+\textbf{Column space (Image):}
+\[
+\operatorname{col}(A) = \{Ax \mid x \in \mathbb{R}^n\} = \operatorname{span}\{\text{cột của } A\}
+\]
+\[
+\dim\bigl(\operatorname{col}(A)\bigr) = \operatorname{rank}(A)
+\]
+
+\textbf{Row space:}
+\[
+\operatorname{row}(A) = \operatorname{col}(A^T), \quad \dim\bigl(\operatorname{row}(A)\bigr) = \operatorname{rank}(A)
+\]
+
+\textbf{Left null space:}
+\[
+\ker(A^T) = \{y \in \mathbb{R}^m \mid A^T y = 0\}, \quad \dim\bigl(\ker(A^T)\bigr) = m - \operatorname{rank}(A)
+\]
+
+\[
+\mathbb{R}^n = \ker(A) \oplus \operatorname{row}(A), \qquad
+\mathbb{R}^m = \ker(A^T) \oplus \operatorname{col}(A)
+\]
+
+% ============================================================
+\section{Tính hạng -- Phương pháp}
+% ============================================================
+
+\begin{enumerate}
+    \item Khử bậc thang (row echelon form): hạng = số hàng có pivot.
+    \item Khử bậc thang rút gọn (RREF): hạng = số hàng khác $0$.
+    \item Phân tích SVD: hạng = số giá trị suy biến (singular values) khác $0$.
+    \item Phân tích LU: hạng = số pivot trong $U$.
+\end{enumerate}
+
+% ============================================================
+\section{Đẳng thức Frobenius (Rank)}
+% ============================================================
+
+Cho $A_{m \times p}$, $B_{p \times n}$:
+\[
+\operatorname{rank}(AB) = \operatorname{rank}(B) - \dim\bigl(\ker(A) \cap \operatorname{col}(B)\bigr)
+\]
+

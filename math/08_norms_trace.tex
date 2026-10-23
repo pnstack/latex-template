@@ -1,0 +1,104 @@
+
+% ============================================================
+\section{Vết ma trận (Trace)}
+% ============================================================
+
+\[
+\operatorname{tr}(A) = \sum_{i=1}^n a_{ii}
+\]
+
+\textbf{Tính chất:}
+\begin{align}
+\operatorname{tr}(A + B) &= \operatorname{tr}(A) + \operatorname{tr}(B) \\
+\operatorname{tr}(cA) &= c \cdot \operatorname{tr}(A) \\
+\operatorname{tr}(AB) &= \operatorname{tr}(BA) \\
+\operatorname{tr}(ABC) &= \operatorname{tr}(BCA) = \operatorname{tr}(CAB) \quad \text{(tính chất vòng)} \\
+\operatorname{tr}(A^T) &= \operatorname{tr}(A) \\
+\operatorname{tr}(A) &= \sum_{i=1}^n \lambda_i \\
+\operatorname{tr}(A^k) &= \sum_{i=1}^n \lambda_i^k \\
+\operatorname{tr}(I_n) &= n
+\end{align}
+
+% ============================================================
+\section{Chuẩn vector (Vector Norm)}
+% ============================================================
+
+Cho $x \in \mathbb{R}^n$:
+
+\begin{align}
+\|x\|_1 &= \sum_{i=1}^n |x_i| \\
+\|x\|_2 &= \sqrt{\sum_{i=1}^n |x_i|^2} = \sqrt{x^* x} \\
+\|x\|_p &= \left(\sum_{i=1}^n |x_i|^p\right)^{1/p} \\
+\|x\|_\infty &= \max_{i} |x_i|
+\end{align}
+
+% ============================================================
+\section{Chuẩn ma trận (Matrix Norm)}
+% ============================================================
+
+\textbf{Chuẩn Frobenius:}
+\[
+\|A\|_F = \sqrt{\sum_{i,j} |a_{ij}|^2} = \sqrt{\operatorname{tr}(A^* A)} = \sqrt{\sum_{i=1}^r \sigma_i^2}
+\]
+
+\textbf{Chuẩn induced (operator norm) tương ứng $\ell_p$:}
+\[
+\|A\|_p = \max_{x \neq 0} \frac{\|Ax\|_p}{\|x\|_p}
+\]
+
+\begin{align}
+\|A\|_1 &= \max_j \sum_{i=1}^m |a_{ij}| \quad \text{(tổng cột max)} \\
+\|A\|_\infty &= \max_i \sum_{j=1}^n |a_{ij}| \quad \text{(tổng hàng max)} \\
+\|A\|_2 &= \sigma_{\max}(A) \quad \text{(giá trị suy biến lớn nhất)}
+\end{align}
+
+% ============================================================
+\section{Tính chất chuẩn ma trận}
+% ============================================================
+
+\begin{align}
+\|A\| &\ge 0, \quad \|A\| = 0 \iff A = O \\
+\|cA\| &= |c| \cdot \|A\| \\
+\|A + B\| &\le \|A\| + \|B\| \\
+\|AB\| &\le \|A\| \cdot \|B\| \\
+\|Ax\| &\le \|A\| \cdot \|x\|
+\end{align}
+
+% ============================================================
+\section{Điều kiện số (Condition Number)}
+% ============================================================
+
+\[
+\kappa(A) = \|A\| \cdot \|A^{-1}\|
+\]
+
+Nếu dùng chuẩn $2$:
+\[
+\kappa_2(A) = \frac{\sigma_{\max}(A)}{\sigma_{\min}(A)}
+\]
+
+\begin{itemize}
+    \item $\kappa(A) \ge 1$ luôn.
+    \item $\kappa(A) = 1$ khi $A$ trực giao (hoặc bội của trực giao).
+    \item $\kappa(A)$ lớn $\Longrightarrow$ $A$ gần suy biến $\Longrightarrow$ hệ phương trình nhạy nhiễu.
+\end{itemize}
+
+% ============================================================
+\section{Chuẩn đặc biệt}
+% ============================================================
+
+\textbf{Chuẩn nuclear (trace norm):}
+\[
+\|A\|_* = \sum_{i=1}^r \sigma_i = \operatorname{tr}\bigl(\sqrt{A^*A}\bigr)
+\]
+
+\textbf{Chuẩn quang phổ (spectral norm):}
+\[
+\|A\|_2 = \sigma_{\max}(A)
+\]
+
+Bất đẳng thức quan trọng:
+\[
+\|A\|_2 \le \|A\|_F \le \sqrt{r} \cdot \|A\|_2
+\]
+

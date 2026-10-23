@@ -1,0 +1,238 @@
+
+% ============================================================
+\section{Ma trận trực giao (Orthogonal)}
+% ============================================================
+
+$Q_{n \times n}$ trực giao nếu:
+\[
+Q^TQ = QQ^T = I \quad \Longleftrightarrow \quad Q^{-1} = Q^T
+\]
+
+\textbf{Tính chất:}
+\begin{align}
+\det(Q) &= \pm 1 \\
+\|Qx\|_2 &= \|x\|_2 \quad \text{(bảo toàn chuẩn $\ell_2$)} \\
+\kappa_2(Q) &= 1
+\end{align}
+
+Ví dụ: quay, phản xạ, Householder, Givens.
+
+% ============================================================
+\section{Ma trận Hermitian (Tự liên hợp)}
+% ============================================================
+
+\[
+A^* = A \quad (\text{tức } \overline{A}^T = A)
+\]
+
+\textbf{Tính chất:}
+\begin{enumerate}
+    \item Mọi trị riêng là số thực.
+    \item Vector riêng tương ứng trị riêng khác nhau trực giao.
+    \item Luôn đường chéo hóa được (Schur $\Rightarrow$ đường chéo thực).
+    \item $A = Q\Lambda Q^*$ với $Q$ unitary, $\Lambda$ đường chéo thực.
+    \item $x^*Ax$ là số thực với mọi $x$.
+\end{enumerate}
+
+% ============================================================
+\section{Ma trận Skew-Hermitian}
+% ============================================================
+
+\[
+A^* = -A
+\]
+Trị riêng là số thuần ảo (pure imaginary). $iA$ là Hermitian.
+
+% ============================================================
+\section{Ma trận Unitary}
+% ============================================================
+
+\[
+U^*U = UU^* = I \quad \Longleftrightarrow \quad U^{-1} = U^*
+\]
+Khái quát trực giao sang số phức. $|\det(U)| = 1$.
+
+% ============================================================
+\section{Ma trận Xác định (Definiteness)}
+% ============================================================
+
+Cho $A$ Hermitian cấp $n$. Xét $f(x) = x^*Ax$:
+
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Loại} & \textbf{Điều kiện} & \textbf{Trị riêng} \\
+\hline
+Dương xác định (PD) & $x^*Ax > 0 \;\forall x \neq 0$ & $\lambda_i > 0 \;\forall i$ \\
+Bán dương xác định (SPD) & $x^*Ax \ge 0 \;\forall x$ & $\lambda_i \ge 0 \;\forall i$ \\
+Âm xác định (ND) & $x^*Ax < 0 \;\forall x \neq 0$ & $\lambda_i < 0 \;\forall i$ \\
+Bán âm xác định (SND) & $x^*Ax \le 0 \;\forall x$ & $\lambda_i \le 0 \;\forall i$ \\
+Không xác định & $x^*Ax$ đổi dấu & Có $\lambda > 0$ và $\lambda < 0$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Tiêu chuẩn Sylvester:} $A$ dương xác định $\iff$ mọi con đường chéo chính $> 0$:
+\[
+a_{11} > 0, \quad
+\begin{vmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{vmatrix} > 0, \quad
+\begin{vmatrix} a_{11} & a_{12} & a_{13} \\ a_{21} & a_{22} & a_{23} \\ a_{31} & a_{32} & a_{33} \end{vmatrix} > 0, \quad \dots
+\]
+
+% ============================================================
+\section{Ma trận Toeplitz}
+% ============================================================
+
+$a_{ij} = t_{i-j}$ -- hằng số trên mỗi đường chéo song song đường chéo chính.
+
+\[
+T = \begin{pmatrix}
+t_0 & t_{-1} & t_{-2} \\
+t_1 & t_0 & t_{-1} \\
+t_2 & t_1 & t_0
+\end{pmatrix}
+\]
+
+% ============================================================
+\section{Ma trận Circulant}
+% ============================================================
+
+Trường hợp đặc biệt của Toeplitz: mỗi hàng là cyclic shift của hàng trước.
+
+\[
+C = \begin{pmatrix}
+c_0 & c_{n-1} & \cdots & c_1 \\
+c_1 & c_0 & \cdots & c_2 \\
+\vdots & \vdots & \ddots & \vdots \\
+c_{n-1} & c_{n-2} & \cdots & c_0
+\end{pmatrix}
+\]
+
+Trị riêng: $\lambda_k = \sum_{j=0}^{n-1} c_j \, \omega^{jk}$, \; $\omega = e^{2\pi i/n}$.
+
+Đường chéo hóa được bằng FFT: $C = F^* \Lambda F$ ($F$: ma trận DFT).
+
+% ============================================================
+\section{Ma trận Hadamard}
+% ============================================================
+
+$H_{n \times n}$ Hadamard: $h_{ij} \in \{+1, -1\}$ và $HH^T = nI$.
+
+Cấp $2^k$ (Walsh--Hadamard):
+\[
+H_1 = (1), \qquad H_{2^k} = \begin{pmatrix} H_{2^{k-1}} & H_{2^{k-1}} \\ H_{2^{k-1}} & -H_{2^{k-1}} \end{pmatrix}
+\]
+
+% ============================================================
+\section{Ma trận Stochastic}
+% ============================================================
+
+\textbf{Xác suất (right stochastic):} $a_{ij} \ge 0$, \; $\sum_j a_{ij} = 1$ với mỗi hàng $i$.
+
+\textbf{Tính chất:} Trị riêng lớn nhất $\lambda_1 = 1$.
+
+\textbf{Ma trận chuyển tiếp Markov:} $P$ stochastic, $\pi^T P = \pi^T$ (phân phối dừng).
+
+% ============================================================
+\section{Ma trận Hilbert}
+% ============================================================
+
+\[
+H_n = \left(\frac{1}{i+j-1}\right)_{n \times n}
+\]
+
+Điều kiện số rất lớn $\Longrightarrow$ hệ Hilbert là ví dụ kinh điển về bài toán ill-conditioned.
+
+% ============================================================
+\section{Ma trận Projection (Phép chiếu)}
+% ============================================================
+
+\textbf{Chiếu trực giao} lên $\operatorname{col}(A)$:
+\[
+P = A(A^TA)^{-1}A^T
+\]
+
+Tính chất: $P^2 = P$ (idempotent), $P^T = P$ (đối xứng).
+
+\textbf{Chiếu lên đường chéo:} $P = \operatorname{diag}(p_1, \dots, p_n)$ với $p_i \in \{0,1\}$.
+
+% ============================================================
+\section{Ma trận Positive Definite -- Tổng hợp}
+% ============================================================
+
+Cho $A$ Hermitian dương xác định:
+\begin{enumerate}
+    \item Mọi $\lambda_i > 0$.
+    \item $\det(A) > 0$.
+    \item $A^{-1}$ cũng dương xác định.
+    \item Cholesky tồn tại: $A = LL^*$.
+    \item $x^*Ax > 0 \;\forall x \neq 0$.
+    \item Mọi con đường chéo chính $> 0$.
+    \item Chạy Jacobi/Gauss--Seidel hội tụ.
+\end{enumerate}
+
+% ============================================================
+\section{Ma trận Sparse (Thưa)}
+% ============================================================
+
+Phần lớn phần tử bằng $0$. Lưu trữ:
+\begin{itemize}
+    \item \textbf{CSR (Compressed Sparse Row):} 3 mảng -- values, column indices, row pointers.
+    \item \textbf{CSC (Compressed Sparse Column):} tương tự theo cột.
+    \item \textbf{COO (Coordinate):} danh sách $(i, j, \text{value})$.
+\end{itemize}
+
+Giải hệ thưa: Cholesky thưa, GMRES, Conjugate Gradient.
+
+% ============================================================
+\section{Ma trận Kronecker}
+% ============================================================
+
+Cho $A_{m \times n}$, $B_{p \times q}$:
+\[
+A \otimes B = \begin{pmatrix}
+a_{11}B & a_{12}B & \cdots & a_{1n}B \\
+a_{21}B & a_{22}B & \cdots & a_{2n}B \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1}B & a_{m2}B & \cdots & a_{mn}B
+\end{pmatrix}_{mp \times nq}
+\]
+
+\textbf{Tính chất:}
+\begin{align}
+(A \otimes B)(C \otimes D) &= (AC) \otimes (BD) \\
+(A \otimes B)^T &= A^T \otimes B^T \\
+(A \otimes B)^{-1} &= A^{-1} \otimes B^{-1} \\
+\operatorname{tr}(A \otimes B) &= \operatorname{tr}(A) \cdot \operatorname{tr}(B) \\
+\det(A \otimes B) &= (\det A)^p \cdot (\det B)^m \quad (A_{m \times m}, B_{p \times p})
+\end{align}
+
+% ============================================================
+\section{Ma trận Hadamard (element-wise product)}
+% ============================================================
+
+\[
+(A \circ B)_{ij} = a_{ij} \cdot b_{ij}
+\]
+
+\textbf{Tính chất:}
+\begin{align}
+A \circ B &= B \circ A \\
+(A \circ B)^T &= A^T \circ B^T \\
+\operatorname{tr}(A^T(B \circ C)) &= \operatorname{tr}((A^TB) \circ C) \quad \text{(trick)}
+\end{align}
+
+% ============================================================
+\section{Vector hóa và Ma trận vec}
+% ============================================================
+
+$\operatorname{vec}(A)$: chồng các cột của $A$ thành vector dài $mn$.
+
+\[
+\operatorname{vec}(AXB) = (B^T \otimes A) \operatorname{vec}(X)
+\]
+
+\[
+\operatorname{tr}(A^TB) = \operatorname{vec}(A)^T \operatorname{vec}(B)
+\]
+

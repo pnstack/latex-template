@@ -1,0 +1,156 @@
+
+% ============================================================
+\section{Dạng tổng quát}
+% ============================================================
+
+\[
+Ax = b
+\]
+trong đó $A_{m \times n}$, $x \in \mathbb{R}^n$, $b \in \mathbb{R}^m$.
+
+\begin{itemize}
+    \item \textbf{Đồng nhất:} $Ax = 0$ -- luôn có nghiệm $x = 0$.
+    \item \textbf{Không đồng nhất:} $Ax = b$, $b \neq 0$.
+\end{itemize}
+
+% ============================================================
+\section{Định lý nghiệm -- Rouché--Capelli}
+% ============================================================
+
+\[
+\text{Hệ } Ax = b \text{ có nghiệm} \iff \operatorname{rank}(A) = \operatorname{rank}(A \mid b)
+\]
+
+\begin{itemize}
+    \item $\operatorname{rank}(A) = \operatorname{rank}(A \mid b) = n$ $\Longrightarrow$ nghiệm duy nhất.
+    \item $\operatorname{rank}(A) = \operatorname{rank}(A \mid b) < n$ $\Longrightarrow$ vô số nghiệm.
+    \item $\operatorname{rank}(A) < \operatorname{rank}(A \mid b)$ $\Longrightarrow$ vô nghiệm.
+\end{itemize}
+
+\textbf{Không gian nghiệm} ($Ax = 0$):
+\[
+\text{Nghiệm tổng quát} = \text{nghiệm particulière} + \text{null space của } A
+\]
+Số tham số tự do $= n - \operatorname{rank}(A)$.
+
+% ============================================================
+\section{Quy tắc Cramer}
+% ============================================================
+
+Cho $A_{n \times n}$, $\det(A) \neq 0$:
+\[
+x_i = \frac{\det(A_i)}{\det(A)}, \quad i = 1, \dots, n
+\]
+trong đó $A_i$ là ma trận $A$ thay cột thứ $i$ bằng vector $b$.
+
+% ============================================================
+\section{Nghịch đảo -- nghiệm trực tiếp}
+% ============================================================
+
+Nếu $A$ khả nghịch:
+\[
+x = A^{-1}b
+\]
+
+% ============================================================
+\section{Giải bằng phân tích LU}
+% ============================================================
+
+Cho $A = LU$:
+\begin{enumerate}
+    \item Giải $Ly = b$ \quad (thuận, thế tiến).
+    \item Giải $Ux = y$ \quad (nghịch, thế hồi).
+\end{enumerate}
+
+Với $PA = LU$ (partial pivot):
+\begin{enumerate}
+    \item Giải $Ly = Pb$.
+    \item Giải $Ux = y$.
+\end{enumerate}
+
+% ============================================================
+\section{Giải bằng phân tích QR}
+% ============================================================
+
+Cho $A = QR$:
+\[
+Rx = Q^T b
+\]
+Giải $Rx = Q^Tb$ bằng thế hồi (tam giác trên).
+
+\textbf{Ưu điểm:} ổn định số học hơn LU.
+
+% ============================================================
+\section{Hệ overdetermined -- Bình phương tối thiểu}
+% ============================================================
+
+Khi $m > n$ (nhiều phương trình hơn ẩn), $Ax = b$ thường vô nghiệm chính xác. Giải tối thiểu:
+\[
+\min_x \|Ax - b\|_2^2
+\]
+
+\textbf{Phương trình chuẩn (Normal Equation):}
+\[
+A^T A \, x = A^T b
+\]
+\[
+x = (A^T A)^{-1} A^T b \quad \text{(nếu } A^TA \text{ khả nghịch)}
+\]
+
+\textbf{Bằng SVD:} $A = U\Sigma V^T$:
+\[
+x = V\Sigma^+ U^T b
+\]
+
+% ============================================================
+\section{Hệ underdetermined -- Norm tối thiểu}
+% ============================================================
+
+Khi $m < n$ (ít phương trình hơn ẩn), có vô số nghiệm. Chọn nghiệm có norm nhỏ nhất:
+\[
+\min_x \|x\|_2 \quad \text{subject to} \quad Ax = b
+\]
+\[
+x = A^T(AA^T)^{-1}b = A^+ b
+\]
+
+% ============================================================
+\section{Phương pháp lặp}
+% ============================================================
+
+\textbf{Tách $A = M - N$:}
+\[
+Mx_{k+1} = Nx_k + b
+\]
+
+\subsection{Jacobi}
+$M = D$, $N = L + U$ (trong $A = D - L - U$, $D$ đường chéo).
+\[
+x^{(k+1)}_i = \frac{1}{a_{ii}} \left( b_i - \sum_{j \neq i} a_{ij} x^{(k)}_j \right)
+\]
+
+\subsection{Gauss--Seidel}
+$M = D - L$, $N = U$.
+\[
+x^{(k+1)}_i = \frac{1}{a_{ii}} \left( b_i - \sum_{j < i} a_{ij} x^{(k+1)}_j - \sum_{j > i} a_{ij} x^{(k)}_j \right)
+\]
+
+\subsection{SOR (Successive Over-Relaxation)}
+\[
+x^{(k+1)}_i = (1-\omega) x^{(k)}_i + \frac{\omega}{a_{ii}} \left( b_i - \sum_{j < i} a_{ij} x^{(k+1)}_j - \sum_{j > i} a_{ij} x^{(k)}_j \right)
+\]
+Hội tụ khi $0 < \omega < 2$ (với $A$ Hermitian dương xác định).
+
+\textbf{Điều kiện hội tụ:} Bán kính quang phổ $\rho(M^{-1}N) < 1$.
+
+% ============================================================
+\section{Hệ phương trình ma trận $AX = B$}
+% ============================================================
+
+Nếu $A$ khả nghịch:
+\[
+X = A^{-1}B
+\]
+
+Nếu dùng LU: $A = LU$, giải $LY = B$ rồi $UX = Y$.
+

@@ -1,0 +1,182 @@
+
+% ============================================================
+\section{Phân tích LU}
+% ============================================================
+
+\[
+A = LU
+\]
+trong đó $L$ tam giác dưới (đường chéo $= 1$), $U$ tam giác trên.
+
+Nếu cần hoán đổi hàng:
+\[
+PA = LU \quad \text{(phân tích PLU)}
+\]
+
+\textbf{Điều kiện:} Tồn tại khi mọi con đường chéo chính (leading principal minor) khác $0$.
+
+% ============================================================
+\section{Phân tích LDU}
+% ============================================================
+
+\[
+A = LDU
+\]
+$L$: tam giác dưới (đường chéo $= 1$), $D$: đường chéo, $U$: tam giác trên (đường chéo $= 1$).
+
+Nếu $A$ đối xứng: $U = L^T$ nên $A = LDL^T$.
+
+% ============================================================
+\section{Phân tích Cholesky}
+% ============================================================
+
+Cho $A$ Hermitian dương xác định:
+\[
+A = LL^*
+\]
+trong đó $L$ tam giác dưới với các phần tử đường chéo dương thực.
+
+\textbf{Công thức:}
+\begin{align}
+l_{ii} &= \sqrt{a_{ii} - \sum_{k=1}^{i-1} |l_{ik}|^2} \\
+l_{ij} &= \frac{1}{l_{jj}} \left( a_{ij} - \sum_{k=1}^{j-1} l_{ik}\overline{l_{jk}} \right), \quad i > j
+\end{align}
+
+% ============================================================
+\section{Phân tích QR}
+% ============================================================
+
+Cho $A_{m \times n}$ ($m \ge n$):
+\[
+A = QR
+\]
+trong đó $Q_{m \times m}$ trực giao ($Q^TQ = I$), $R_{m \times n}$ tam giác trên.
+
+\textbf{Cách tính (Gram--Schmidt):}
+Cho $A = (a_1 \mid a_2 \mid \cdots \mid a_n)$:
+\begin{align}
+u_1 &= a_1, \quad q_1 = \frac{u_1}{\|u_1\|} \\
+u_k &= a_k - \sum_{j=1}^{k-1} (a_k \cdot q_j) q_j, \quad q_k = \frac{u_k}{\|u_k\|}
+\end{align}
+
+\[
+Q = (q_1 \mid q_2 \mid \cdots \mid q_n), \qquad r_{ij} = a_j \cdot q_i
+\]
+
+% ============================================================
+\section{SVD -- Phân tích giá trị suy biến}
+% ============================================================
+
+Cho $A_{m \times n}$:
+\[
+A = U\Sigma V^*
+\]
+trong đó:
+\begin{itemize}
+    \item $U_{m \times m}$: ma trận trực giao (vector riêng trái).
+    \item $V_{n \times n}$: ma trận trực giao (vector riêng phải).
+    \item $\Sigma_{m \times n}$: ma trận ``đường chéo'' với $\sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r > 0$.
+\end{itemize}
+
+\[
+\Sigma = \begin{pmatrix}
+\sigma_1 & & & \\
+& \sigma_2 & & \\
+& & \ddots & \\
+& & & \sigma_r \\
+& & & & \\
+\end{pmatrix}
+\]
+
+\textbf{Hệ quả:}
+\begin{align}
+A^*A &= V(\Sigma^*\Sigma) V^* \\
+AA^* &= U(\Sigma\Sigma^*) U^* \\
+\|A\|_2 &= \sigma_1 \\
+\|A\|_F &= \sqrt{\sigma_1^2 + \cdots + \sigma_r^2} \\
+A^+ &= V\Sigma^+ U^*
+\end{align}
+
+\textbf{Ứng dụng:}
+\begin{itemize}
+    \item Nén ảnh: giữ $k$ giá trị suy biến lớn nhất.
+    \item Giải hệ phương trình ít nghiệm bình phương tối thiểu.
+    \item Xác định hạng, điều kiện số.
+\end{itemize}
+
+% ============================================================
+\section{Phân tích Spectral (Đối xứng)}
+% ============================================================
+
+Cho $A$ Hermitian:
+\[
+A = Q\Lambda Q^T = \sum_{i=1}^n \lambda_i \, q_i q_i^T
+\]
+trong đó $Q$ trực giao, $\Lambda$ đường chéo thực.
+
+% ============================================================
+\section{Phân tích Eigendecomposition (Tổng quát)}
+% ============================================================
+
+Nếu $A$ đường chéo hóa được:
+\[
+A = PDP^{-1} = \sum_{i=1}^n \lambda_i \, v_i w_i^T
+\]
+trong đó $P = (v_1 \mid \cdots \mid v_n)$, $P^{-1} = \begin{pmatrix} w_1^T \\ \vdots \\ w_n^T \end{pmatrix}$.
+
+% ============================================================
+\section{Phân tích Polar}
+% ============================================================
+
+Cho $A_{n \times n}$:
+\[
+A = UP = QU
+\]
+trong đó $U$ trực giao (hoặc unitary), $P, Q$ Hermitian bán xác định dương.
+
+$P = \sqrt{A^*A}$, \quad $Q = \sqrt{AA^*}$.
+
+% ============================================================
+\section{Phân tích Jordan (tóm tắt)}
+% ============================================================
+
+\[
+A = PJP^{-1}
+\]
+$J$: ma trận tam giác có khối Jordan trên đường chéo (xem thêm bài 06).
+
+% ============================================================
+\section{Phân tích không gian (Null Space Decomposition)}
+% ============================================================
+
+Cho $A_{m \times n}$, $\operatorname{rank}(A) = r$:
+
+Tồn tại SVD: $A = U\Sigma V^T$. Chia $V = (V_1 \mid V_2)$ với $V_1 \in \mathbb{R}^{n \times r}$:
+\begin{align}
+\operatorname{col}(A) &= \operatorname{span}(U_1) \\
+\operatorname{row}(A) &= \operatorname{span}(V_1) \\
+\ker(A) &= \operatorname{span}(V_2) \\
+\ker(A^T) &= \operatorname{span}(U_2)
+\end{align}
+
+% ============================================================
+\section{Bảng so sánh phân tích}
+% ============================================================
+
+\begin{center}
+\begin{tabular}{|l|c|l|}
+\hline
+\textbf{Phân tích} & \textbf{Yêu cầu} & \textbf{Dạng} \\
+\hline
+LU & Con đường chéo $\neq 0$ & $A = LU$ \\
+Cholesky & Hermitian dương xác định & $A = LL^*$ \\
+QR & Luôn tồn tại & $A = QR$ \\
+SVD & Luôn tồn tại & $A = U\Sigma V^*$ \\
+Eigendecomp & Đường chéo hóa được & $A = PDP^{-1}$ \\
+Jordan & Luôn tồn tại & $A = PJP^{-1}$ \\
+Schur & Luôn tồn tại & $A = UTU^*$ \\
+Polar & Luôn tồn tại & $A = UP$ \\
+\hline
+\end{tabular}
+\end{center}
+

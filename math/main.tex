@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+
+\usepackage{fontspec}
+\usepackage[vietnamese]{babel}
+
+% Dùng font có sẵn trong TeX Live, không cần cài font-noto
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+
+\usepackage{amsmath, amssymb, geometry}
+\geometry{a4paper, margin=2cm}
+
+\title{Tổng hợp công thức ma trận}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\include{01_basic_operations}
+\include{02_determinant}
+\include{03_inverse_matrix}
+\include{04_rank_nullity}
+\include{05_eigenvalues}
+\include{06_diagonalization}
+\include{07_matrix_decomposition}
+\include{08_norms_trace}
+\include{09_linear_systems}
+\include{10_special_matrices}
+
+\end{document}

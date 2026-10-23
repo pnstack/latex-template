@@ -1,0 +1,140 @@
+
+% ============================================================
+\section{Định nghĩa}
+% ============================================================
+
+\subsection{Cấp 1}
+\[
+\det(a) = a
+\]
+
+\subsection{Cấp 2}
+\[
+\det\begin{pmatrix} a & b \\ c & d \end{pmatrix} = ad - bc
+\]
+
+\subsection{Cấp 3 (Sarrus)}
+\[
+\det\begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}
+= a_{11}a_{22}a_{33} + a_{12}a_{23}a_{31} + a_{13}a_{21}a_{32}
+- a_{13}a_{22}a_{31} - a_{12}a_{21}a_{33} - a_{11}a_{23}a_{32}
+\]
+
+\subsection{Cấp tổng quát}
+Khai triển theo hàng $i$ (Laplace expansion):
+\[
+\det(A) = \sum_{j=1}^{n} (-1)^{i+j} \, a_{ij} \, M_{ij}
+\]
+trong đó $M_{ij}$ là \textbf{phần bù đại số} (minor) -- định thức của ma trận cấp $(n-1)$ bỏ hàng $i$ và cột $j$.
+
+Khai triển theo cột $j$:
+\[
+\det(A) = \sum_{i=1}^{n} (-1)^{i+j} \, a_{ij} \, M_{ij}
+\]
+
+% ============================================================
+\section{Tính chất định thức}
+% ============================================================
+
+\begin{enumerate}
+    \item $\det(I_n) = 1$
+    \item $\det(A^T) = \det(A)$
+    \item $\det(AB) = \det(A) \cdot \det(B)$
+    \item $\det(A^k) = (\det A)^k$
+    \item $\det(cA) = c^n \det(A)$ \quad ($A$ cấp $n$)
+    \item Nếu đổi hai hàng (hai cột): $\det$ đổi dấu.
+    \item Nếu một hàng (cột) nhân $k$: $\det$ nhân $k$.
+    \item Nếu cộng bội của hàng này vào hàng khác: $\det$ không đổi.
+    \item Nếu có hai hàng (cột) tỷ lệ: $\det(A) = 0$.
+    \item $A$ khả nghịch $\Longleftrightarrow$ $\det(A) \neq 0$.
+    \item $\det(A^{-1}) = \dfrac{1}{\det(A)}$
+    \item $\det(A^*) = \overline{\det(A)}$ \quad ($A^*$: chuyển vị liên hợp)
+\end{enumerate}
+
+% ============================================================
+\section{Khai triển Laplace}
+% ============================================================
+
+\[
+\det(A) = \sum_{j=1}^{n} (-1)^{i+j} \, a_{ij} \, M_{ij}
+\quad \text{(theo hàng } i\text{)}
+\]
+
+\[
+\det(A) = \sum_{i=1}^{n} (-1)^{i+j} \, a_{ij} \, M_{ij}
+\quad \text{(theo cột } j\text{)}
+\]
+
+\textbf{Quy tắc Cramer:} Hệ $Ax = b$ ($\det A \neq 0$):
+\[
+x_i = \frac{\det(A_i)}{\det(A)}
+\]
+trong đó $A_i$ là ma trận $A$ thay cột thứ $i$ bằng vector $b$.
+
+% ============================================================
+\section{Định thức ma trận đặc biệt}
+% ============================================================
+
+\subsection{Ma trận đường chéo}
+\[
+\det\bigl(\operatorname{diag}(\lambda_1,\dots,\lambda_n)\bigr) = \prod_{i=1}^n \lambda_i
+\]
+
+\subsection{Ma trận tam giác}
+\[
+\det(L) = \det(U) = \prod_{i=1}^n a_{ii}
+\]
+
+\subsection{Ma trận luân phiên}
+$\det(P) = +1$ hoặc $-1$ tùy số hoán đổi.
+
+\subsection{Ma trận khối (block)}
+Nếu $A, D$ là ma trận vuông:
+\[
+\det\begin{pmatrix} A & B \\ O & D \end{pmatrix} = \det(A) \cdot \det(D)
+\]
+\[
+\det\begin{pmatrix} A & O \\ C & D \end{pmatrix} = \det(A) \cdot \det(D)
+\]
+\[
+\det\begin{pmatrix} O & B \\ C & D \end{pmatrix} = (-1)^{mn} \det(B) \cdot \det(C)
+\]
+với $B$ cấp $m$, $C$ cấp $n$.
+
+% ============================================================
+\section{Định thức ma trận cấp 2, 3 -- Tóm tắt nhanh}
+% ============================================================
+
+\textbf{Cấp 2:}
+\[
+\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc
+\]
+
+\textbf{Cấp 3:}
+\[
+\begin{vmatrix}
+a_1 & b_1 & c_1 \\
+a_2 & b_2 & c_2 \\
+a_3 & b_3 & c_3
+\end{vmatrix}
+= a_1(b_2c_3 - b_3c_2) - b_1(a_2c_3 - a_3c_2) + c_1(a_2b_3 - a_3b_2)
+\]
+
+% ============================================================
+\section{Vùng bù đại số (Adjugate)}
+% ============================================================
+
+Ma trận bù đại số:
+\[
+\operatorname{adj}(A) = \bigl((-1)^{i+j} M_{ji}\bigr) = \bigl(\text{cofactor matrix}\bigr)^T
+\]
+
+Công thức nghịch đảo qua bù đại số:
+\[
+A^{-1} = \frac{1}{\det(A)} \operatorname{adj}(A)
+\]
+

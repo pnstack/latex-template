@@ -1,0 +1,141 @@
+
+% ============================================================
+\section{Điều kiện khả nghịch}
+% ============================================================
+
+Ma trận vuông $A_{n \times n}$ khả nghịch khi và chỉ khi các điều kiện sau tương đương:
+\begin{enumerate}
+    \item $\det(A) \neq 0$
+    \item $\operatorname{rank}(A) = n$
+    \item $A$ có $n$ trị riêng khác $0$
+    \item Hệ $Ax = 0$ chỉ có nghiệm tầm thường $x = 0$
+    \item $A$ hàng đương giá với $I_n$
+    \item $\operatorname{nullity}(A) = 0$
+\end{enumerate}
+
+% ============================================================
+\section{Định nghĩa nghịch đảo}
+% ============================================================
+
+$A^{-1}$ là ma trận duy nhất sao cho:
+\[
+AA^{-1} = A^{-1}A = I_n
+\]
+
+% ============================================================
+\section{Tính nghịch đảo cấp 2}
+% ============================================================
+
+\[
+A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}, \quad
+\det(A) = ad - bc \neq 0
+\]
+\[
+A^{-1} = \frac{1}{ad - bc}
+\begin{pmatrix} d & -b \\ -c & a \end{pmatrix}
+\]
+
+% ============================================================
+\section{Tính nghịch đảo qua bù đại số (Adjugate)}
+% ============================================================
+
+\[
+A^{-1} = \frac{1}{\det(A)} \operatorname{adj}(A)
+\]
+trong đó $\operatorname{adj}(A) = \bigl(C_{ij}\bigr)^T$, $C_{ij} = (-1)^{i+j} M_{ij}$.
+
+% ============================================================
+\section{Tính nghịch đảo -- Khử Gauss--Jordan}
+% ============================================================
+
+Dãy khối (augmented matrix):
+\[
+\bigl(A \mid I_n\bigr) \xrightarrow{\text{hàng ERO}} \bigl(I_n \mid A^{-1}\bigr)
+\]
+
+% ============================================================
+\section{Tính chất nghịch đảo}
+% ============================================================
+
+\begin{align}
+(A^{-1})^{-1} &= A \\
+(AB)^{-1} &= B^{-1} A^{-1} \\
+(A_1 A_2 \cdots A_k)^{-1} &= A_k^{-1} \cdots A_2^{-1} A_1^{-1} \\
+(A^T)^{-1} &= (A^{-1})^T \\
+(cA)^{-1} &= \frac{1}{c} A^{-1}, \quad c \neq 0 \\
+(A^n)^{-1} &= (A^{-1})^n \\
+\det(A^{-1}) &= \frac{1}{\det(A)} \\
+\operatorname{rank}(A^{-1}) &= \operatorname{rank}(A) = n
+\end{align}
+
+% ============================================================
+\section{Nghịch đảo ma trận khối (Block Inverse)}
+% ============================================================
+
+\textbf{Khối tam giác:}
+\[
+\begin{pmatrix} A & B \\ O & D \end{pmatrix}^{-1}
+= \begin{pmatrix} A^{-1} & -A^{-1}BD^{-1} \\ O & D^{-1} \end{pmatrix}
+\]
+
+\[
+\begin{pmatrix} A & O \\ C & D \end{pmatrix}^{-1}
+= \begin{pmatrix} A^{-1} & O \\ -D^{-1}CA^{-1} & D^{-1} \end{pmatrix}
+\]
+
+\textbf{Khối tổng quát (Schur complement):}
+\[
+\begin{pmatrix} A & B \\ C & D \end{pmatrix}^{-1}
+= \begin{pmatrix}
+S_A^{-1} & -S_A^{-1}BD^{-1} \\
+-D^{-1}CS_A^{-1} & D^{-1} + D^{-1}CS_A^{-1}BD^{-1}
+\end{pmatrix}
+\]
+trong đó $S_A = A - BD^{-1}C$ là bù Schur của $D$ trong ma trận.
+
+Tương tự với bù Schur $S_D = D - CA^{-1}B$:
+\[
+\begin{pmatrix} A & B \\ C & D \end{pmatrix}^{-1}
+= \begin{pmatrix}
+A^{-1} + A^{-1}BS_D^{-1}CA^{-1} & -A^{-1}BS_D^{-1} \\
+-S_D^{-1}CA^{-1} & S_D^{-1}
+\end{pmatrix}
+\]
+
+% ============================================================
+\section{Nghịch đảo -- Công thức Woodbury}
+% ============================================================
+
+\[
+(A + UCV)^{-1} = A^{-1} - A^{-1}U(C^{-1} + VA^{-1}U)^{-1}VA^{-1}
+\]
+
+Trường hợp đặc biệt (Sherman--Morrison, rank-1 update):
+\[
+(A + uv^T)^{-1} = A^{-1} - \frac{A^{-1}uv^T A^{-1}}{1 + v^T A^{-1} u}
+\]
+
+% ============================================================
+\section{Pseudo-inverse (Moore--Penrose)}
+% ============================================================
+
+Cho $A_{m \times n}$. Ma trận giả nghịch đảo $A^+$ thỏa mãn:
+\begin{align}
+AA^+A &= A \\
+A^+AA^+ &= A^+ \\
+(AA^+)^T &= AA^+ \\
+(A^+A)^T &= A^+A
+\end{align}
+
+Nếu $\operatorname{rank}(A) = n$ (cột độc lập tuyến tính):
+\[
+A^+ = (A^T A)^{-1} A^T
+\]
+
+Nếu $\operatorname{rank}(A) = m$ (hàng độc lập tuyến tính):
+\[
+A^+ = A^T(AA^T)^{-1}
+\]
+
+Nếu SVD: $A = U\Sigma V^T$ thì $A^+ = V\Sigma^+ U^T$.
+
