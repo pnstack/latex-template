@@ -1,0 +1,34 @@
+\documentclass[12pt]{article}
+
+\usepackage{fontspec}
+\usepackage[vietnamese]{babel}
+
+% TeX Gyre fonts — bundled with TeX Live, no external install
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{TeX Gyre Cursor}
+
+\usepackage{amsmath, amssymb, geometry}
+\geometry{a4paper, margin=2cm}
+
+% Optional packages
+% \usepackage{graphicx}          % images
+% \usepackage{booktabs}          % better tables
+% \usepackage{hyperref}          % clickable links
+% \usepackage{tikz}              % diagrams
+% \usepackage{listings}          % code listings
+
+\title{Tiêu đề tài liệu}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% Include sub-files here
+% \include{chapters/01_chapter}
+% \include{chapters/02_chapter}
+
+\end{document}

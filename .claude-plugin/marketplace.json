@@ -1,0 +1,16 @@
+{
+  "name": "pnstack-latex",
+  "owner": {
+    "name": "pnstack"
+  },
+  "metadata": {
+    "description": "LaTeX projects (Vietnamese-ready) built to PDF on GitHub Actions — no local TeX install"
+  },
+  "plugins": [
+    {
+      "name": "latex",
+      "source": "./plugins/latex",
+      "description": "Create LaTeX projects, push each to its own GitHub repo, and build the PDF on GitHub Actions"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+name: Render LaTeX to PDF
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ['**.md']
+  pull_request:
+    paths-ignore: ['**.md']
+  workflow_dispatch:
+    inputs:
+      root_files:
+        description: 'Root tex files (comma or multiline)'
+        required: false
+        default: 'main.tex'
+
+env:
+  ROOT_FILES: ${{ inputs.root_files || 'main.tex' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Normalize root files
+        id: root-files
+        shell: bash
+        run: |
+          {
+            echo 'files<<EOF'
+            echo "$ROOT_FILES" \
+              | tr ',' '\n' \
+              | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' \
+              | sed '/^$/d'
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Compile LaTeX batch
+        uses: xu-cheng/latex-action@v4
+        with:
+          os: debian
+          latexmk_use_xelatex: true
+          extra_system_packages: |
+            fonts-noto
+            fonts-noto-cjk
+            fonts-noto-color-emoji
+            texlive-pictures
+            texlive-latex-extra
+            texlive-science
+            ghostscript
+            poppler-utils
+          root_file: |
+            ${{ steps.root-files.outputs.files }}
+
+      - name: Upload PDF artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdf
+          path: '*.pdf'
+          if-no-files-found: error

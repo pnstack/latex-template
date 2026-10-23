@@ -1,0 +1,12 @@
+.DS_Store
+# LaTeX build outputs — PDFs are built on GitHub Actions
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+*.pdf
+build/

@@ -1,0 +1,12 @@
+{
+  "name": "latex",
+  "version": "0.1.0",
+  "description": "Create LaTeX projects, push each to its own GitHub repo, and build the PDF on GitHub Actions — no local TeX install",
+  "author": {
+    "name": "pnstack"
+  },
+  "homepage": "https://github.com/pnstack/latex-template",
+  "repository": "https://github.com/pnstack/latex-template",
+  "license": "MIT",
+  "keywords": ["latex", "pdf", "github-actions", "vietnamese"]
+}

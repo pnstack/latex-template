@@ -2,6 +2,25 @@
 
 Template repo để viết tài liệu LaTeX và render PDF tự động bằng GitHub Actions (XeLaTeX, hỗ trợ tiếng Việt).
 
+## Claude Code plugin
+
+Repo này cũng là marketplace cho plugin `latex`: tạo dự án LaTeX mới, mỗi dự án
+một repo GitHub riêng, PDF build bằng GitHub Actions — máy không cần cài TeX.
+
+```
+/plugin install latex --marketplace pnstack/latex-template
+```
+
+Cần `git` và `gh` đã đăng nhập với scope `workflow` (`gh auth refresh -h github.com -s workflow`).
+
+| Lệnh                            | Việc làm                                                         |
+| ------------------------------- | ---------------------------------------------------------------- |
+| `/latex:new <repo> <chủ đề>`    | Scaffold dự án, viết nội dung, tạo repo, push, tải PDF về `build/` |
+| `/latex:build [thư mục]`        | Commit + push thay đổi, chờ CI build, tải PDF về `build/`        |
+
+Skill `latex-vietnamese` (cấu hình tiếng Việt, quy ước chương) nằm trong
+[`plugins/latex`](plugins/latex).
+
 ## Dùng template
 
 1. Bấm **Use this template** để tạo repo mới.
