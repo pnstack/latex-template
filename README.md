@@ -1,18 +1,31 @@
-# Tổng hợp công thức ma trận
+# latex-template
 
-Sách LaTeX tổng hợp công thức ma trận (tiếng Việt), build PDF tự động bằng GitHub Actions.
+Template repo để viết tài liệu LaTeX và render PDF tự động bằng GitHub Actions (XeLaTeX, hỗ trợ tiếng Việt).
 
-## Cấu trúc
+## Dùng template
 
-- `math/main.tex` — file gốc, include các chương `01_…` → `10_…`
-- `.github/workflows/latex.yml` — build PDF bằng `xu-cheng/latex-action` (XeLaTeX)
+1. Bấm **Use this template** để tạo repo mới.
+2. Viết tài liệu trong `example/` (hoặc đổi tên thư mục và sửa `example` trong [`.github/workflows/latex.yml`](.github/workflows/latex.yml)).
+3. Push lên `main` hoặc mở PR → tải PDF ở tab **Actions** → artifact `pdf`.
 
-## Build
+`example/` chứa một tài liệu mẫu (tổng hợp công thức ma trận) để kiểm thử workflow — thay bằng nội dung của bạn.
 
-- **Tự động**: mỗi push lên `main` / PR thay đổi `math/**` → tải PDF ở tab *Actions* → artifact `matrix-formulas`.
-- **Thủ công**: *Actions → Render LaTeX to PDF → Run workflow* (có thể chọn branch, thư mục, root files).
-- **Local**:
+## Workflow
+
+[`latex.yml`](.github/workflows/latex.yml) dùng [`xu-cheng/latex-action`](https://github.com/xu-cheng/latex-action):
+
+- **Tự động**: push lên `main` / PR thay đổi `example/**`.
+- **Thủ công**: *Actions → Render LaTeX to PDF → Run workflow*, với các input:
+
+| Input               | Mặc định   | Ý nghĩa                                         |
+| ------------------- | ---------- | ----------------------------------------------- |
+| `branch`            | (default)  | Branch cần build                                |
+| `working_directory` | `example`  | Thư mục chứa file `.tex`                        |
+| `root_files`        | `main.tex` | Các file gốc, phân tách bằng dấu phẩy/xuống dòng |
+| `artifact_name`     | `pdf`      | Tên artifact upload                             |
+
+## Build local
 
 ```bash
-cd math && latexmk -xelatex main.tex
+cd example && latexmk -xelatex main.tex
 ```
